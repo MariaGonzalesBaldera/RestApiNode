@@ -1,5 +1,8 @@
-const express = require('express');
-const morgan = require('morgan');
+import express from'express';
+import morgan from 'morgan';
+import routerIndex from './routes/index.js'
+import routerMovie from './routes/movies.js'
+import routerUser from './routes/users.js'
 const app = express();
 //setings
 app.set('port',process.env.PORT || 3000)
@@ -9,9 +12,9 @@ app.use(morgan('dev'))
 app.use(express.urlencoded({extended:false}))
 app.use(express.json())
 //routes
-app.use(require('./routes/index'))
-app.use("/api/movies",require('./routes/movies'))
-app.use("/api/users",require('./routes/users'))
+app.use(routerIndex)
+app.use("/api/movies",routerMovie)
+app.use("/api/users",routerUser)
 //starting the server
 app.listen(app.get('port'),()=>{
     console.log(`Server on port ${app.get('port')}`)
